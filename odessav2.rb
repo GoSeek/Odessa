@@ -1,9 +1,12 @@
 #Double quotes search locally, single quotes look in libs
 require "./playername.rb"
+require "./points.rb"
+#To be implemented
+#require "./scoreboard.rb"
 
 def introscreen
 		puts """
-		\tOdessa v.2 by Corey Morrison
+		\tOdessa by Corey Morrison
 		\tNeon Llama Interactive
 		\t      (C) 2015
 		\n
@@ -34,8 +37,6 @@ class Engine
 end
 
 class Scene
-#time not utilized
-@@time = Time.now
 	def enter()
 		puts " "
 	exit(1)
@@ -53,6 +54,8 @@ class Death < Scene
 
 	def enter()
 	puts @@quips[rand(0..(@@quips.length - 1))]
+	sleep 1.5
+	puts "TOTAL POINTS = #{Points.total}"
 	exit(1)
 	end
 end
@@ -72,51 +75,90 @@ class CentralCorridor < Scene
 		
 	#puts "\nKeep your head down, Orbital Specialist #{PlayerName.callplayer}" 
 	puts "\n"
-	puts "The gothons of Planet Percal #25 have invaded your ship and destroyed"
-	puts "your entire crew. You are the last surviving member and your last"
-	puts "mission is to get the neutron destruct bomb from the weapons Armory,"
-	puts "put it in the bridge, and blow the ship up after getting into an"
-	puts "escape pod."
+	puts "The Wraiths of Planet Scaldroon have invaded your ship and destroyed"
+	sleep 2.5
+	puts "your entire crew. You are the last surviving member and your mission"
+	sleep 3.5
+	puts "is to utilize the last nuclear bomb from the weapons Armory,"
+	sleep 3
+	puts "to destroy the ship."
+	sleep 1
 	puts "\n"
-	puts "You're running down the central corridor to the weapons Armory when"
-	puts "a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume"
-	puts "flowing around his hate filled body. He's blocking the door to the"
-	puts "Armory and about to pull a weapon to blast you."
+	puts "You're running to the weapons Armory when"
+	sleep 2.5
+	puts "a Wraith jumps out, red scaly skin, dark grimy teeth, and evil clown costume"
+	sleep 3.5
+	puts "He's blocking the door to the Armory and reaching for his Brain SHredder Rifle.\n\n"
+	sleep 3
 	puts "OPTIONS: 'dodge!', 'shoot!', 'tell a joke', 'use cloaking device'"
 	print ">>>> "
 	
 	action = $stdin.gets.chomp
 	
 		if action == "shoot!"
-			puts "Quick on the draw, you yank out your blaster and fire it at the"
-			puts "Gothon. His clown costume is flowing and moving around his body, which"
-			puts "throws off your aim, causing you to miss him entirely."
-			puts "You've caused him to go into a furious rage. He blasts you repeatedly"
+			puts "Quick on the draw, you yank out your Pulsar Rifle and fire it at the"
+			sleep 2.5
+			puts "Wraith. His clown costume is flowing and moving around his body, which"
+			sleep 2.5
+			puts "throws off your aim and you miss."
+			sleep 2
+			puts "He's now in a furious rage. He blasts you repeatedly"
+			sleep 2.25
 			puts "in the face. You are dead. But he started eating you before you died."
+			sleep 2
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'death'
 		
 		elsif action == "dodge!"
-			puts "Like a world class boxer, you dodge, weave, slip and slide right"
-			puts "as a Gothon Face Scraper Rifle blasts rounds past your head."
-			puts "In the middle of you artful dodge, your foot slips and you"
-			puts "bang your head on the metal wall and pass out."
-			puts "You wake up in excruciating pain, only to realize you're being eaten and most of your lower body is"
-			puts "already Gothon lunch."
+			puts "You dodge as a Wraith Face Scraper Round blasts past your head."
+			sleep 2.5
+			puts "The ship keels, causing you to fall over and you"
+			sleep 2
+			puts "bang your head on the metal wall; passing out."
+			sleep 2.25
+			puts "You wake up in excruciating pain, only to realize you're being eaten."
+			sleep 3
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'death'
 			
 		elsif action == "tell a joke"
-			puts "Lucky for you they made you learn Gothon Humor Tactics in the academy"
-			puts "You tell the one Gothon joke you know:\n\n"
+			puts "Lucky for you they made you learn Wraith Humor Tactics in the academy"
+			sleep 3.5
+			puts "You tell the one Wraith joke you know:\n\n"
+			sleep 2.5
 			puts "Lbhe zbgure vf fb sng, jura fur fvgf nebhaq gur ubhfr, fur fvgf, nebhaq gu ubhfr\n\n"
-			puts "The gothon stops, tries not to laugh, thern bursts into a hysterical fit."
+			sleep 3
+			puts "The Wraith stops, tries not to laugh, then bursts into a hysterical fit."
+			sleep 3.5
 			puts "While he's laughing, you run up and put some lead into his brain."
-			puts "You jump through the Armory door"
+			sleep 3
+			puts "You then jump through the Armory door"
+			sleep 2
+				3.times do Points.addpoint
+				end
+			puts "3 POINTS GAINED"
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'escape_pod'
 		
 		elsif action == "use cloaking device"
 			puts "Good thing you charged the cloaking device at the space station before you deployed."
+			sleep 4
 			puts "It flickers to life just in time, hiding you from sight as you make a run for it."
+			sleep 3.5
 			puts "You realize you need to get off of this doomed ship!"
+			sleep 3
+				5.times do Points.addpoint
+				end
+			puts "5 POINTS GAINED"
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'laser_weapon_armory'
 				
 		else
@@ -129,14 +171,20 @@ end
 class LaserWeaponArmory < Scene
 
 	def enter()
-		puts "You do a barrel roll into the weapons Armory, crouch and scan the room"
-		puts "for more Gothons that might be hiding. It's dead quiet, toooooo quiet."
+		puts "You do a barrel roll into the weapons Armory, then crouch and scan the room"
+		sleep 4
+		puts "for more Wraiths that might be hiding. It's dead quiet, toooooo quiet.\n\n"
+		sleep 4
 		puts "You stand up and run to the far side of the room and find the"
-		puts "neutron bomb in its container. There's a keypad lock on the box"
-		puts "and you need the code to get the bomb out. If you get the code"
-		puts "wrong 10 times then the lock closes forever and you can't get the bomb"
+		sleep 3.5
+		puts "nuclear bomb in its container. There's a keypad lock on the box..."
+		sleep 3.5
+		puts "If you get the code wrong 10 times then the lock seals forever."
+		sleep 3.5
 		puts "the code is 2 digits but someone left a fingerprint on the first digit."
+		sleep 3.5
 		puts "revealing a 1...guess the second digit"
+		sleep 3
 		code = "#{rand(1..6)}"
 		print "[keypad]>"
 		guess = $stdin.gets.chomp
@@ -148,16 +196,48 @@ class LaserWeaponArmory < Scene
 			print "[keypad]> "
 			guess = $stdin.gets.chomp
 			end
-		if guess == code
+		if guess == code && guesses < 3
 			puts "BEEP BEEP! WHOOOOSSHH!"
+			sleep 0.5
 			puts "The container clicks open and the seal breaks, letting gas out."
-			puts "You grab the neutron bomb and run as fast as you can to the"
-			puts "bridge where you must place it in the right spot."
+			sleep 3
+			puts "You grab the nuclear bomb and run as fast as you can to the bridge."
+			sleep 3
+			puts "5 POINTS GAINED"
+				5.times do Points.addpoint
+				end
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
+			return 'the_bridge'
+		elsif guess == code && guesses > 3
+			puts "BEEP BEEP! WHOOOOSSHH!"
+			sleep 0.5
+			puts "The container clicks open and the seal breaks, letting gas out."
+			sleep 3
+			puts "You've wasted valuable time incorrectly guessing the lock code."
+			sleep 3
+			puts "Now, you can hear Wraiths nearby, taunting you."
+			sleep 2.5
+			puts "You grab the nuclear bomb and run as fast as you can to the bridge."
+			sleep 3
+			puts "3 POINTS GAINED"
+				3.times do Points.addpoint
+				end
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'the_bridge'
 		else
 			puts "The lock buzzes one last time and then you hear a sickening"
+			sleep 2.5
 			puts "melting sound, as the mechanism is fused together."
-			puts "You decide to sit there, and finally pissed off Gothons blow you up."
+			sleep 2.5
+			puts "You decide to sit there, and finally pissed off Wraiths blow you up."
+			sleep 2
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'death'
 		end
 	end
@@ -166,32 +246,68 @@ end
 class TheBridge < Scene
 
 	def enter()
-		puts "You burst onto the Bridge with nuetron destruct bomb"
-		puts "under your arm and surprise 5 Gothons who are playing Uno."
+		puts "You burst onto the Bridge with nuclear bomb"
+		sleep 2
+		puts "under your arm and surprise 5 Wraiths who are playing Uno."
+		sleep 2.5
 		puts "Each of their clown costumes is uglier than the last."
+		sleep 2
 		puts "They haven't pulled their weapons out yet, as they see the active bomb under your arm"
+		sleep 4
 		puts "and don't want you to set it off."
+		sleep 2
 		puts "OPTIONS: 'throw the bomb', 'place the bomb'"
 		
 		action = $stdin.gets.chomp
 		
 		if action == "throw the bomb"
 			puts "In a panic, you throw the bomb at the card game."
+			sleep 3.5
 			puts "and make a lead for the door. Right as you drop it a"
-			puts "Gothon shoots you right in the back, killing you instantly"
-			puts "As you die, you see another Gothon frantically try to disarm"
+			sleep 3.5
+			puts "Wraith shoots you right in the back, killing you instantly!"
+			sleep 3.5
+			puts "As you die, you see another Wraith frantically try to disarm"
+			sleep 3.5
 			puts "the bomb. You fade out knowing they're all going to die"
+			sleep 3.5
 			puts "and that you're better at Uno than any damn Alien."
+			sleep 3
+				7.times do Points.addpoint
+				end
+			puts "\n"
+			puts "*" * 10
+			puts "'NUMERO UNO' ACHIEVMENT"
+			puts "*" * 10
+			puts "\n"
+			puts "7 POINTS GAINED"
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'death'
 		elsif action == "place the bomb"
 			puts "You point your blaster at the bomb under your arm."
-			puts "and the Gothons put up their hands and start to sweat."
+			sleep 4
+			puts "and the Wraiths put up their hands and start to sweat."
+			sleep 4
 			puts "You inch backward to the door, open it, and then carefully"
+			sleep 3
 			puts "place the bomb on the floor, pointing your blaster at it."
+			sleep 4
 			puts "You then jump back through the door, punch the close button"
-			puts "and blast the lock so the Gothons can't get out."
+			sleep 4
+			puts "and blast the lock so the Wraiths can't get out."
+			sleep 4
 			puts "Now that the bomb is placed, you run for the escape pods."
+			sleep 4
 			puts "to get off this tin can."
+			sleep 2
+				3.times do Points.addpoint
+				end
+			puts "3 POINTS GAINED"
+			puts "-" * 10
+			puts "\n\n"
+			sleep 2
 			return 'escape_pod'
 		else
 			puts "DOES NOT COMPUTE"
@@ -204,12 +320,19 @@ class EscapePod < Scene
 
 	def enter()
 		puts "You rush through the ship desperately trying to make it to"
+		sleep 3
 		puts "the escape pod before the whole ship explodes. It seems like"
-		puts "hardly any Gothons are on the ship, so your run is clear of"
+		sleep 3
+		puts "hardly any Wraiths are on the ship, so your run is clear of"
+		sleep 3
 		puts "interference. You get to the chamber with the escape pods, and"
+		sleep 3
 		puts "now you need to pick one to take. Some of them could be damaged."
+		sleep 3
 		puts "but it's impossible to tell from your vantage point. There are 3"
+		sleep 3
 		puts "Which one do you take?"
+		sleep 1
 		
 		good_pod = rand(1..3)
 		print "[POD #]> "
@@ -217,17 +340,32 @@ class EscapePod < Scene
 		
 		if guess != good_pod
 			puts "You jump into POD %s and hit the eject button." % guess
-			puts "The pod escape out into the void of space, then"
-			puts "implodes as the hull ruptures, crushing your body into jelly."
+			sleep 3
+			puts "The pod shoots out into the void of space, then"
+			sleep 3
+			puts "implodes and as the hull ruptures, it crushes your body into jelly."
+			sleep 3
+			puts "-" * 10
+			sleep 2
+			puts "\n\n"
 			return 'death'
 		else
 			puts "You jump into POD %s and hit the eject button." % guess
+			sleep 3
 			puts "The pod easily slides out into space heading to"
+			sleep 3
 			puts "the planet below. As it flies to the planet, you look"
+			sleep 3
 			puts "back and see your ship implode then explode like a"
-			puts "bright star, taking out the Gothon ship at the same"
-			puts "time."
-			
+			sleep 3
+			puts "bright star, taking out the Wraiths on the ship at the same time"
+			sleep 3.5
+				4.times do Points.addpoint
+				end
+			puts "4 POINTS GAINED"
+			puts "-" * 10
+			sleep 2
+			puts "\n\n"
 			return 'finished'
 		end
 	end
@@ -236,6 +374,8 @@ end
 class Finished < Scene
 	def enter()
 		puts "You won! Good job."
+		sleep 1
+		puts "TOTAL POINTS = #{Points.total}"
 	end
 end
 
@@ -263,6 +403,7 @@ class Map
 		return next_scene(@start_scene)
 	end
 end
+
 
 introscreen
 PlayerName.initialize
