@@ -1,8 +1,10 @@
-#Double quotes search locally, single quotes look in libs
 require "./playername.rb"
 require "./points.rb"
-#To be implemented
+#To be implemented:
+#-----------------------
 #require "./scoreboard.rb"
+#Clean up sleep methods/string; create a combined method
+#Use 'sum' method to count final score. Allows custom points to be added to array ('a'..'m').sum("Letters: ")
 
 def introscreen
 		puts """
@@ -73,7 +75,6 @@ class CentralCorridor < Scene
 		sleep 0.25
 		end
 		
-	#puts "\nKeep your head down, Orbital Specialist #{PlayerName.callplayer}" 
 	puts "\n"
 	puts "The Wraiths of Planet Scaldroon have invaded your ship and destroyed"
 	sleep 2.5
@@ -138,8 +139,7 @@ class CentralCorridor < Scene
 			sleep 3
 			puts "You then jump through the Armory door"
 			sleep 2
-				3.times do Points.addpoint
-				end
+			Points.addpoint(3)
 			puts "3 POINTS GAINED"
 			puts "-" * 10
 			puts "\n\n"
@@ -153,8 +153,7 @@ class CentralCorridor < Scene
 			sleep 3.5
 			puts "You realize you need to get off of this doomed ship!"
 			sleep 3
-				5.times do Points.addpoint
-				end
+			Points.addpoint(5)
 			puts "5 POINTS GAINED"
 			puts "-" * 10
 			puts "\n\n"
@@ -204,8 +203,7 @@ class LaserWeaponArmory < Scene
 			puts "You grab the nuclear bomb and run as fast as you can to the bridge."
 			sleep 3
 			puts "5 POINTS GAINED"
-				5.times do Points.addpoint
-				end
+			Points.addpoint(5)
 			puts "-" * 10
 			puts "\n\n"
 			sleep 2
@@ -222,8 +220,7 @@ class LaserWeaponArmory < Scene
 			puts "You grab the nuclear bomb and run as fast as you can to the bridge."
 			sleep 3
 			puts "3 POINTS GAINED"
-				3.times do Points.addpoint
-				end
+			Points.addpoint(3)
 			puts "-" * 10
 			puts "\n\n"
 			sleep 2
@@ -273,8 +270,7 @@ class TheBridge < Scene
 			sleep 3.5
 			puts "and that you're better at Uno than any damn Alien."
 			sleep 3
-				7.times do Points.addpoint
-				end
+			Points.addpoint(7)
 			puts "\n"
 			puts "*" * 10
 			puts "'NUMERO UNO' ACHIEVMENT"
@@ -302,8 +298,7 @@ class TheBridge < Scene
 			sleep 4
 			puts "to get off this tin can."
 			sleep 2
-				3.times do Points.addpoint
-				end
+			Points.addpoint(3)
 			puts "3 POINTS GAINED"
 			puts "-" * 10
 			puts "\n\n"
@@ -360,8 +355,7 @@ class EscapePod < Scene
 			sleep 3
 			puts "bright star, taking out the Wraiths on the ship at the same time"
 			sleep 3.5
-				4.times do Points.addpoint
-				end
+			Points.addpoint(4)
 			puts "4 POINTS GAINED"
 			puts "-" * 10
 			sleep 2

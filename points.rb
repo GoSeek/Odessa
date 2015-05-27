@@ -3,11 +3,11 @@ module Points
 	@score = []
 	attr_accessor :score
 	
-	def Points.addpoint
-		@score.push(1)
+	def Points.addpoint(n)
+		@score.push(n)
 	end
 	
 	def Points.total
-		@score.length * 10
+		@score.inject(:+)
 	end
 end
