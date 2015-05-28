@@ -42,7 +42,7 @@ module Support
 		puts "#{str}"
 		sleep n
 	end
-	
+
 	#This is to keep the script clean. It blinks 'msg', 'n' times, at 'i' seconds each.
 	def Support.bl(i, n, msg)
 		msg = msg
