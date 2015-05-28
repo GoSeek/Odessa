@@ -1,7 +1,7 @@
 
 #To be implemented:
 #-----------------------
-#Create flashing function in Support
+###Create flashing function in Support
 #Scoreboard functionality
 
 
@@ -37,10 +37,23 @@ end
 
 module Support
 
+	#This is to keep the script clean. It sleeps 'str', 'n' seconds.
 	def Support.z(n, str)
 		puts "#{str}"
 		sleep n
 	end
+	
+	#This is to keep the script clean. It blinks 'msg', 'n' times, at 'i' seconds each.
+	def Support.bl(i, n, msg)
+		msg = msg
+		n.times do
+		print "\r\t\t#{ msg }"
+		sleep i
+		print "\r#{ '    ' * msg.length }"
+		sleep i
+		end
+	end
+	
 end
 
 def introscreen
@@ -93,7 +106,7 @@ class Death < Scene
 
 	def enter()
 	Support.z(1.5, @@quips[rand(0..(@@quips.length - 1))])
-	puts "TOTAL POINTS = #{Tracking.total}"
+	Support.bl(0.35, 4, "TOTAL POINTS = #{Tracking.total}")
 	exit(1)
 	end
 end
@@ -102,15 +115,7 @@ class CentralCorridor < Scene
 	
 	def enter()
 	
-	msg = "DEPLOYING ORBITAL SPECIALIST #{Tracking.callplayer}!"
-	
-		5.times do
-		print "\r\t\t#{ msg }"
-		sleep 0.25
-		print "\r#{ '    ' * msg.length }"
-		sleep 0.25
-		end
-		
+	Support.bl(0.25, 5, "DEPLOYING ORBITAL SPECIALIST #{Tracking.callplayer}!")
 	puts "\n"
 	Support.z(2.5, "The Wraiths of Planet Scaldroon have invaded your ship and destroyed")
 	Support.z(3.5,"your entire crew. You are the last surviving member and your mission")
@@ -133,7 +138,7 @@ class CentralCorridor < Scene
 			Support.z(2, "in the face. You are dead. But he started eating you before you died.")
 			puts "-" * 10
 			Support.z(2, "\n\n")
-			return 'death'
+			return 'finished'
 		
 		elsif action == "dodge!"
 			Support.z(2.6, "You dodge as a Wraith Face Scraper Round blasts past your head.")
@@ -248,7 +253,7 @@ class TheBridge < Scene
 			Tracking.addpoint(7)
 			puts "\n"
 			puts "*" * 10
-			puts "'NUMERO UNO' ACHIEVMENT"
+			Support.bl(0.25, 3, "'NUMERO UNO' ACHIEVMENT")
 			puts "*" * 10
 			puts "\n"
 			Support.z(1, "7 POINTS GAINED")
@@ -317,7 +322,7 @@ class Finished < Scene
 	def enter()
 		puts "You won! Good job."
 		sleep 1
-		puts "TOTAL POINTS = #{Tracking.total}"
+		Support.bl(0.35, 4, "TOTAL POINTS = #{Tracking.total}")
 	end
 end
 
